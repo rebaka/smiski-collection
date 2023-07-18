@@ -1,34 +1,69 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import React, { useEffect, useState } from 'react'
 import './App.css'
+import {Button} from '@material-ui/core';
+
+type Smiski = {
+    _id: String,
+    id: Number,
+    name: String,
+    series: String,
+    desc: String,
+}
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const [smiskis, setSmiskis] = useState<Smiski[]>([]);
+  const [title, setTitle] = useState('');
+
+  async function handleCreateSmiski(e: React.FormEvent) {
+    //tells browser to not refresh page
+    e.preventDefault();
+
+    //posts to send data
+    await fetch('http://localhost:5000/smiski', {
+      method: 'POST', 
+      body: JSON.stringify({
+        title, 
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    setTitle("");
+  }
+
+  //To fetch data from API endpoints created
+  useEffect(() => {
+    async function fetchSmiskis() {
+      const response = await fetch("http://localhost:5000/smiski"); //return object with JSON method
+      const newSmiskis = await response.json();
+      setSmiskis(newSmiskis);
+    }
+    fetchSmiskis();
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className="App">
+          <ul className="smiskis">
+              {
+                  smiskis.map((smiski) => (
+                      <li key={smiski._id}>{smiski.name} {smiski.series}</li>
+                  ))
+              }
+          </ul>
+
+          <form onSubmit={handleCreateSmiski}>
+            <label htmlFor="smiski-title">Smiski Title </label>
+              <input id="smiski-title"
+                value = {title}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                    {
+                        setTitle(e.target.value);
+                    }}
+                    />
+                     <Button color="primary" variant="contained"> Create Smiski </Button> 
+          </form>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
   )
 }
 

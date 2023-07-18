@@ -4,7 +4,10 @@ const Schema = mongoose.Schema;
 // const ObjectId = mongoose.Types.ObjectId;
 
 const SmiskiSchema = new Schema({
-    name: String
+    id: Number,
+    name: String,
+    series: String, 
+    desc: String,
     // set: String,
     // description: String
 });
