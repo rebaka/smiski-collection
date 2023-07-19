@@ -7,7 +7,7 @@ const SmiskiSchema = new Schema({
     id: Number,
     name: String,
     series: String, 
-    desc: String,
+    description: String,
     // set: String,
     // description: String
 });

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './App.css'
-import {Button} from '@material-ui/core';
+import {Button, CardActionArea, CardContent, Typography} from '@material-ui/core';
+import Card from '@mui/material/Card';
 
 type Smiski = {
     _id: String,
@@ -43,16 +44,32 @@ function App() {
   }, []);
 
   return (
-      <div className="App">
+      <div className="App">          
           <ul className="smiskis">
               {
                   smiskis.map((smiski) => (
-                      <li key={smiski._id}>{smiski.name} {smiski.series}</li>
+                    <Card className='card' key={smiski._id}>
+
+                      <CardContent className='customCardContent'>
+                        <Typography className='SmiskiName' gutterBottom variant="h5" component="div">
+                          {smiski.name}
+                        </Typography>
+
+                        <Typography className='SmiskiSeries' gutterBottom variant="h6">
+                          {smiski.series}
+                        </Typography>
+
+                        <Typography className='SmiskiDescription' gutterBottom variant="body2" paragraph>
+                          {smiski.description}
+                        </Typography>
+                      </CardContent>
+        
+                    </Card>
                   ))
               }
           </ul>
 
-          <form onSubmit={handleCreateSmiski}>
+          {/* <form onSubmit={handleCreateSmiski}>
             <label htmlFor="smiski-title">Smiski Title </label>
               <input id="smiski-title"
                 value = {title}
@@ -62,7 +79,7 @@ function App() {
                     }}
                     />
                      <Button color="primary" variant="contained"> Create Smiski </Button> 
-          </form>
+          </form> */}
       </div>
   )
 }
