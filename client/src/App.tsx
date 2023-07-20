@@ -47,16 +47,18 @@ function App() {
   return (
       <div className="App">
 
-<div className='header'>
-          <text className='title'>Smiski Collection</text>
+        {/* <div className='header'>
+          <text className='title'>Smiski Collection</text> */}
 
-          <nav>
+          {/* <nav>
             <ul className='navLinks'>
-              <Button className='aboutButton' variant="text" size="large"> About </Button> 
-              <Button className='registerButton' variant="text" size="large"> Register/Log in </Button> 
-            </ul>
+              <li><a href='#'>About</a></li>
+              <li><a href='#'>Register/Log in</a></li> */}
+              {/* <Button className='aboutButton' variant="text" size="large"> About </Button> 
+              <Button className='registerButton' variant="text" size="large"> Register/Log in </Button>  */}
+            {/* </ul>
           </nav>
-        </div>
+        </div> */}
 
         {/* <div className='header'>
           <text className='title'>Smiski Collection</text>
