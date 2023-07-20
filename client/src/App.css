@@ -18,6 +18,30 @@ body {
   align-items: center;
 }
 
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  text-align: left;
+  text-indent: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.title {
+  color: #23a441;
+  font-size: 220%;
+  font-weight: 650;
+  padding: 10px;
+  font-family: 'Roboto';
+}
+
+.navLinks {
+  padding-right: 20px;
+}
+
 .smiskis {
   display: grid;
   width: 800px;
@@ -25,7 +49,13 @@ body {
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 20px;
   color: black;
+  margin-top: 100px;
 }
+
+/* .smiskis div {
+  height: 200px;
+  border-radius: 18px;
+} */
 
 .smiskis div {
   position: relative;
@@ -38,14 +68,28 @@ body {
   border: 1px solid white;
   background-color: white;
   border-radius: 18px;
-}
+} 
 
 .SmiskiName {
   font-size: 14px;
-  padding: -10px;
+  margin-bottom: -40px;
   color: #555;
+} 
+
+.SmiskiSeries {
+  margin-top: -40px;
 }
 
-.custom-typography {
-  margin-bottom: 8px;
+.SmiskiDescription {
+  /* overflow: auto; */
+}
+
+.customCardContent {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.customCardContent .MuiTypography-root{
+  margin-bottom: 4px;
 }

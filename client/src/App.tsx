@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './App.css'
 import {Button, CardActionArea, CardContent, Typography} from '@material-ui/core';
 import Card from '@mui/material/Card';
+import { CardActions } from '@mui/material';
 
 type Smiski = {
     _id: String,
@@ -44,30 +45,51 @@ function App() {
   }, []);
 
   return (
-      <div className="App">          
-          <ul className="smiskis">
-              {
-                  smiskis.map((smiski) => (
-                    <Card className='card' key={smiski._id}>
+      <div className="App">
 
-                      <CardContent className='customCardContent'>
-                        <Typography className='SmiskiName' gutterBottom variant="h5" component="div">
-                          {smiski.name}
-                        </Typography>
+<div className='header'>
+          <text className='title'>Smiski Collection</text>
 
-                        <Typography className='SmiskiSeries' gutterBottom variant="h6">
-                          {smiski.series}
-                        </Typography>
+          <nav>
+            <ul className='navLinks'>
+              <Button className='aboutButton' variant="text" size="large"> About </Button> 
+              <Button className='registerButton' variant="text" size="large"> Register/Log in </Button> 
+            </ul>
+          </nav>
+        </div>
 
-                        <Typography className='SmiskiDescription' gutterBottom variant="body2" paragraph>
-                          {smiski.description}
-                        </Typography>
-                      </CardContent>
-        
-                    </Card>
-                  ))
-              }
-          </ul>
+        {/* <div className='header'>
+          <text className='title'>Smiski Collection</text>
+          <Button className='aboutButton' variant="text" size="large"> About </Button> 
+          <Button className='registerButton' variant="text" size="large"> Register/Log in </Button> 
+        </div> */}
+
+        <ul className="smiskis">
+          {
+            smiskis.map((smiski) => (
+              <Card className='card' key={smiski._id}>
+                <CardContent className='customCardContent'>
+                <Typography className='SmiskiName' variant="h5" component="div" style={{ marginTop: '-8px' }}>
+                  {smiski.name}
+                </Typography>
+
+                <Typography className='SmiskiSeries' variant="h6" style={{ marginTop: '-8px' }}>
+                  {smiski.series}
+                </Typography>
+
+                <Typography className='SmiskiDescription' variant="body2" paragraph>
+                  {smiski.description}
+                </Typography>
+                  </CardContent>
+                    <CardActions>
+                      <button>
+                        Check
+                      </button>
+                    </CardActions>
+              </Card>
+            ))
+          }
+        </ul>
 
           {/* <form onSubmit={handleCreateSmiski}>
             <label htmlFor="smiski-title">Smiski Title </label>
