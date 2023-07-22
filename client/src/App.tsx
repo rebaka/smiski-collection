@@ -11,6 +11,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import About from './pages/About';
 
+import Navbar from "./components/Navbar"
+
 type Smiski = {
     _id: String,
     id: Number,
@@ -52,67 +54,6 @@ function App() {
   }, []);
 
   return (
-
-    //   <div className="App">
-
-    //     {/* <div className="container">
-    //       <div className="smiskiContainer">
-    //       {smiskis.map((smiski) => (
-    //         <div className='smiskiPart' key={smiski._id}>
-    //           <FormGroup>
-    //             <FormControlLabel control={<Checkbox />} label="" />
-    //           </FormGroup>
-
-    //           <Typography className="SmiskiName" variant="h5" component="div" style={{ marginTop: '-8px' }}>
-    //             {smiski.name}
-    //           </Typography>
-
-    //           <Typography className="SmiskiSeries" variant="h6" style={{ marginTop: '-8px' }}>
-    //             {smiski.series}
-    //           </Typography>
-
-    //           <Typography className="SmiskiDescription" variant="body2" paragraph>
-    //             {smiski.description}
-    //           </Typography>
-    //         </div>
-    //       )
-    //       )}
-    //     </div> */}
-
-      
-        // <div className="container">
-        //   <div className="smiskiContainer">
-        //   {smiskis.map((smiski) => (
-        //     <Card className="smiskiCard" style={{ borderRadius: 18}} key={smiski._id}>
-        //       <CardContent className="customCardContent">
-        //         <CardActions>
-        //           <FormGroup>
-        //             <FormControlLabel control={<Checkbox />} label="" />
-        //           </FormGroup>
-        //         </CardActions>
-
-        //         <Typography className="SmiskiName" variant="h5" component="div" style={{ marginTop: '-8px' }}>
-        //           {smiski.name}
-        //         </Typography>
-
-        //         <Typography className="SmiskiSeries" variant="h6" style={{ marginTop: '-8px' }}>
-        //           {smiski.series}
-        //         </Typography>
-
-        //         <Typography className="SmiskiDescription" variant="body2" paragraph>
-        //           {smiski.description}
-        //         </Typography>
-        //       </CardContent>
-        //     </Card>
-        //     )
-        //   )}
-        //   </div>
-        // </div> 
-
-
-
-    // </div> 
-
     <div>
       <BrowserRouter>
       <Header/>

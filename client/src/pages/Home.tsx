@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import './Home.css'
-import {CardContent, Typography, styled} from '@material-ui/core';
+import {CardContent, Typography} from '@material-ui/core';
 import Card from '@mui/material/Card';
 import { CardActions, Checkbox, FormGroup, FormControlLabel } from '@mui/material';
 import { CheckBox } from '@mui/icons-material';
-
-import { Header } from '../components/Header';
 
 type Smiski = {
     _id: String,
@@ -18,7 +16,6 @@ type Smiski = {
 export default function Home() {
 
   const [smiskis, setSmiskis] = useState<Smiski[]>([]);
-  const [title, setTitle] = useState('');
 
   //To fetch data from API endpoints created
   useEffect(() => {
@@ -32,7 +29,6 @@ export default function Home() {
 
   return (
       <div className="Home">
-        {/* <Header/>       */}
         <div className="container">
           <div className="smiskiContainer">
           {smiskis.map((smiski) => (

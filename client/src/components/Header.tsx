@@ -1,7 +1,4 @@
-import React from 'react';
-import { AppBar, Toolbar, Typography, styled, Tooltip } from '@mui/material';
-import { Route, Routes, BrowserRouter, Link } from 'react-router-dom';
-import About from "../pages/About"
+import { Link } from 'react-router-dom';
 import Navbar from "./Navbar"
 
 import './Header.css'
