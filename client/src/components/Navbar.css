@@ -1,0 +1,17 @@
+.about {
+    color: #555;
+    font-size: 23px;
+    font-family: 'Roboto';
+    padding: 10px;
+}
+
+.about:hover {
+    color: #000;
+    font-size: 23px;
+    font-family: 'Roboto';
+    padding: 10px;
+}
+
+.customNavbar {
+    margin-left: auto;
+}
