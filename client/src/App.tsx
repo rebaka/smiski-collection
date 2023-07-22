@@ -1,8 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import './App.css'
-import {Button, CardActionArea, CardContent, Typography} from '@material-ui/core';
+import {Button, CardActionArea, CardContent, Typography, styled} from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
 import Card from '@mui/material/Card';
-import { CardActions } from '@mui/material';
+import { CardActions, Checkbox, FormGroup, FormControlLabel } from '@mui/material';
+import { Header } from './components/Header';
+import { CheckBox } from '@mui/icons-material';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
+import Home from './pages/Home';
+import About from './pages/About';
 
 type Smiski = {
     _id: String,
@@ -17,22 +24,22 @@ function App() {
   const [smiskis, setSmiskis] = useState<Smiski[]>([]);
   const [title, setTitle] = useState('');
 
-  async function handleCreateSmiski(e: React.FormEvent) {
-    //tells browser to not refresh page
-    e.preventDefault();
+  // async function handleCreateSmiski(e: React.FormEvent) {
+  //   //tells browser to not refresh page
+  //   e.preventDefault();
 
-    //posts to send data
-    await fetch('http://localhost:5000/smiski', {
-      method: 'POST', 
-      body: JSON.stringify({
-        title, 
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    setTitle("");
-  }
+  //   //posts to send data
+  //   await fetch('http://localhost:5000/smiski', {
+  //     method: 'POST', 
+  //     body: JSON.stringify({
+  //       title, 
+  //     }),
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   });
+  //   setTitle("");
+  // }
 
   //To fetch data from API endpoints created
   useEffect(() => {
@@ -45,66 +52,77 @@ function App() {
   }, []);
 
   return (
-      <div className="App">
 
-        {/* <div className='header'>
-          <text className='title'>Smiski Collection</text> */}
+    //   <div className="App">
 
-          {/* <nav>
-            <ul className='navLinks'>
-              <li><a href='#'>About</a></li>
-              <li><a href='#'>Register/Log in</a></li> */}
-              {/* <Button className='aboutButton' variant="text" size="large"> About </Button> 
-              <Button className='registerButton' variant="text" size="large"> Register/Log in </Button>  */}
-            {/* </ul>
-          </nav>
-        </div> */}
+    //     {/* <div className="container">
+    //       <div className="smiskiContainer">
+    //       {smiskis.map((smiski) => (
+    //         <div className='smiskiPart' key={smiski._id}>
+    //           <FormGroup>
+    //             <FormControlLabel control={<Checkbox />} label="" />
+    //           </FormGroup>
 
-        {/* <div className='header'>
-          <text className='title'>Smiski Collection</text>
-          <Button className='aboutButton' variant="text" size="large"> About </Button> 
-          <Button className='registerButton' variant="text" size="large"> Register/Log in </Button> 
-        </div> */}
+    //           <Typography className="SmiskiName" variant="h5" component="div" style={{ marginTop: '-8px' }}>
+    //             {smiski.name}
+    //           </Typography>
 
-        <ul className="smiskis">
-          {
-            smiskis.map((smiski) => (
-              <Card className='card' key={smiski._id}>
-                <CardContent className='customCardContent'>
-                <Typography className='SmiskiName' variant="h5" component="div" style={{ marginTop: '-8px' }}>
-                  {smiski.name}
-                </Typography>
+    //           <Typography className="SmiskiSeries" variant="h6" style={{ marginTop: '-8px' }}>
+    //             {smiski.series}
+    //           </Typography>
 
-                <Typography className='SmiskiSeries' variant="h6" style={{ marginTop: '-8px' }}>
-                  {smiski.series}
-                </Typography>
+    //           <Typography className="SmiskiDescription" variant="body2" paragraph>
+    //             {smiski.description}
+    //           </Typography>
+    //         </div>
+    //       )
+    //       )}
+    //     </div> */}
 
-                <Typography className='SmiskiDescription' variant="body2" paragraph>
-                  {smiski.description}
-                </Typography>
-                  </CardContent>
-                    <CardActions>
-                      <button>
-                        Check
-                      </button>
-                    </CardActions>
-              </Card>
-            ))
-          }
-        </ul>
+      
+        // <div className="container">
+        //   <div className="smiskiContainer">
+        //   {smiskis.map((smiski) => (
+        //     <Card className="smiskiCard" style={{ borderRadius: 18}} key={smiski._id}>
+        //       <CardContent className="customCardContent">
+        //         <CardActions>
+        //           <FormGroup>
+        //             <FormControlLabel control={<Checkbox />} label="" />
+        //           </FormGroup>
+        //         </CardActions>
 
-          {/* <form onSubmit={handleCreateSmiski}>
-            <label htmlFor="smiski-title">Smiski Title </label>
-              <input id="smiski-title"
-                value = {title}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    {
-                        setTitle(e.target.value);
-                    }}
-                    />
-                     <Button color="primary" variant="contained"> Create Smiski </Button> 
-          </form> */}
-      </div>
+        //         <Typography className="SmiskiName" variant="h5" component="div" style={{ marginTop: '-8px' }}>
+        //           {smiski.name}
+        //         </Typography>
+
+        //         <Typography className="SmiskiSeries" variant="h6" style={{ marginTop: '-8px' }}>
+        //           {smiski.series}
+        //         </Typography>
+
+        //         <Typography className="SmiskiDescription" variant="body2" paragraph>
+        //           {smiski.description}
+        //         </Typography>
+        //       </CardContent>
+        //     </Card>
+        //     )
+        //   )}
+        //   </div>
+        // </div> 
+
+
+
+    // </div> 
+
+    <div>
+      <BrowserRouter>
+      <Header/>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
+      </BrowserRouter>
+    </div>
   )
 }
 

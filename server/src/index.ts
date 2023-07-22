@@ -8,6 +8,7 @@ import {config} from 'dotenv'
 config();
 
 import Smiski from "./models/Smiski";
+import path from "path";
 
 const PORT = 5000;
 

@@ -8,8 +8,6 @@ const SmiskiSchema = new Schema({
     name: String,
     series: String, 
     description: String,
-    // set: String,
-    // description: String
 });
 
 const SmiskiModel = mongoose.model("Smiski", SmiskiSchema);
