@@ -23,7 +23,7 @@ const SmiskiCard: React.FC<Props> = ({ smiski }) => {
                 <div className="checkboxContainer">
                     <CardActions>
                         <FormGroup>
-                            <FormControlLabel control={<Checkbox sx={{ height: 5, mt: -6, mb: -2 }}/>} label="" />
+                            <FormControlLabel control={<Checkbox sx={{ height: 5, mt: -6, mb: -2, ml: -1 }}/>} label="" />
                         </FormGroup>
                     </CardActions>
                 </div>
