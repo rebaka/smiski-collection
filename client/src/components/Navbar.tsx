@@ -9,9 +9,9 @@ const Navbar: React.FC = () => {
                 <li>
                     <Link to="/about" className="about">About</Link>
                 </li>
-                {/* <li>
-                    <Link to="/about" className="about">About</Link>
-                </li> */}
+                <li>
+                    <Link to="/login" className="login">Log in</Link>
+                </li>
             </ul>
         </nav>
     )
