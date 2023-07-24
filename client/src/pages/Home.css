@@ -17,6 +17,10 @@ body {
   z-index: 1;
   position: absolute;
   height: 25px;
+  justify-content: center;
+  align-items: center;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .container {
