@@ -23,7 +23,7 @@ app.use(express.json());
 
 //Fetches all data from mongoDB in Smiski collection 
 app.get('/smiski', async (req: Request, res: Response) => {
-    const smiskis = await Smiski.find(); //change Smiski to a the name of specific collection to change
+    const smiskis = await Smiski.find(); //change Smiski to the name of specific collection to change
     res.json(smiskis);
 })
 

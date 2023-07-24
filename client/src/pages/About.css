@@ -1,18 +1,13 @@
 .aboutContainer {
     width: 400px;
-    background-color: beige;
+    background-color: white;
     padding: 30px;
     border-radius: 18px;
 }
 
-.aboutText {
+p {
     color: #555;
-    font-weight: 400;
-    font-size: 20px;
-}
-
-.aboutText2 {
-    color: #555;
+    font-family: "Roboto";
     font-weight: 400;
     font-size: 20px;
 }

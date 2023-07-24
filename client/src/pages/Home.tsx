@@ -1,21 +1,35 @@
 import React, { useEffect, useState } from 'react'
 import './Home.css'
-import {CardContent, Typography} from '@material-ui/core';
-import Card from '@mui/material/Card';
-import { CardActions, Checkbox, FormGroup, FormControlLabel } from '@mui/material';
-import { CheckBox } from '@mui/icons-material';
+import { Autocomplete, TextField } from '@mui/material';
+import SmiskiCard from '../components/SmiskiCard';
 
 type Smiski = {
     _id: String,
     id: Number,
     name: String,
     series: String,
-    desc: String,
+    description: String,
+}
+
+//filer out duplicate series names
+function getUniqueSeries(smiskis: Smiski[]): string[] {
+  const seriesSet = new Set<string>(); //contains only unique values
+  smiskis.forEach((smiski) => seriesSet.add(smiski.series));
+
+  const seriesArray = Array.from(seriesSet);
+
+  return seriesArray;
 }
 
 export default function Home() {
 
   const [smiskis, setSmiskis] = useState<Smiski[]>([]);
+
+  const [filteredSmiskis, setFilteredSmiskis] = useState<Smiski[]>([]);
+  const [filterText, setFilterText] = useState<string>('');
+  const [selectedSeries, setSelectedSeries] = useState<string | null>(null);
+
+  const uniqueSeries = getUniqueSeries(smiskis);
 
   //To fetch data from API endpoints created
   useEffect(() => {
@@ -23,40 +37,42 @@ export default function Home() {
       const response = await fetch("http://localhost:5000/smiski"); //return object with JSON method
       const newSmiskis = await response.json();
       setSmiskis(newSmiskis);
+      setFilteredSmiskis(newSmiskis); //automatically sets filtered smiskis as all smiskis
     }
     fetchSmiskis();
   }, []);
 
+  //For filtering data based off of series
+  useEffect(() => {
+    const filteredSmiskis = smiskis.filter((smiski) =>
+      smiski.series.toLowerCase().includes(filterText.toLowerCase()) &&
+      (!selectedSeries || smiski.series.toLowerCase().includes(selectedSeries.toLowerCase()))
+    );
+    setFilteredSmiskis(filteredSmiskis);
+  }, [smiskis, filterText, selectedSeries]);
+
   return (
       <div className="Home">
-        <div className="container">
-          <div className="smiskiContainer">
-          {smiskis.map((smiski) => (
-            <Card className="smiskiCard" style={{ borderRadius: 18}} key={smiski._id}>
-              <CardContent className="customCardContent">
-                <CardActions>
-                  <FormGroup>
-                    <FormControlLabel control={<Checkbox />} label="" />
-                  </FormGroup>
-                </CardActions>
+        <div className="content">
+          <div className="filter" >
+            <Autocomplete
+              id="seriesFilter"
+              value={selectedSeries}
+              onChange={(event, newValue) => setSelectedSeries(newValue)}
+              options={uniqueSeries}
+              renderInput={(params) => <TextField {...params} label="Filter by Series" />}
+              sx={{ backgroundColor: 'white', borderRadius: 4, boxShadow: 2, p: 1.5, fontWeight: 'bold' }}
+            />
+          </div>
 
-                <Typography className="SmiskiName" variant="h5" component="div" style={{ marginTop: '-8px' }}>
-                  {smiski.name}
-                </Typography>
-
-                <Typography className="SmiskiSeries" variant="h6" style={{ marginTop: '-8px' }}>
-                  {smiski.series}
-                </Typography>
-
-                <Typography className="SmiskiDescription" variant="body2" paragraph>
-                  {smiski.description}
-                </Typography>
-              </CardContent>
-            </Card>
-            )
-          )}
+          <div className="container">
+            <div className="smiskiContainer">
+              {filteredSmiskis.map((smiski) => (
+                <SmiskiCard key={smiskis.id} smiski={smiski} />
+              ))}
+            </div>
+          </div>
         </div>
-      </div>
     </div> 
   )
 }
