@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import './Register.css'
+import './Signup.css'
 
 export default function() {
-    return()
+    return(
+        <div>
+            <p>
+                "HELLO"
+            </p>
+        </div>
+    )
 }
