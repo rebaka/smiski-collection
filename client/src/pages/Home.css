@@ -12,7 +12,7 @@ body {
 }
 
 .filter {
-  width: 750px;
+  width: 1000px;
   top: 85px;
   z-index: 1;
   position: absolute;
@@ -30,9 +30,9 @@ body {
 
 .smiskiContainer {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   justify-items: center;
   gap: 20px;
-  max-width: 750px;
+  max-width: 1000px;
   margin: 0 auto;
 }
