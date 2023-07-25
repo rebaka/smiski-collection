@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import Home from './pages/Home';
 import About from './pages/About';
+import Signin from './pages/Signin';
 
 
 import { ThemeProvider, createMuiTheme, makeStyles } from '@material-ui/core/styles';
@@ -26,6 +27,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
             <Route path="/about" element={<About />} />
+            <Route path="/sign-in" element={<Signin />} />
           </Routes>
       </BrowserRouter>
     </div>

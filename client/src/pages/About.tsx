@@ -1,6 +1,11 @@
+import { Paper } from '@material-ui/core';
 import './About.css'
+import { Typography } from '@material-ui/core';
 
 export default function About() {
+
+    const paperStyle = {padding: 20, height: '50vh', width:350, margin: "20px auto"}
+
     return (
         <div className='aboutContainer'>
 
