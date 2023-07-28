@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 export default function Signin() {
 
-    const paperStyle = {padding: 20, height: '50vh', width:350, margin: "20px auto"}
+    const paperStyle = {padding: 20, height: '60vh', width:350, margin: "20px auto"}
     const avatarStyle = {backgroundColor: "#23a441"}
 
     return (
