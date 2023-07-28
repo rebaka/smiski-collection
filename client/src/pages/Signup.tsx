@@ -114,6 +114,7 @@ export default function Signup() {
                         onChange={handleEmailChange}
                         helperText={emailError}
                         error={Boolean(emailError)}
+                        autoComplete="off"
                     />
                     
                     <TextField
@@ -125,6 +126,7 @@ export default function Signup() {
                         onChange={handleUsernameChange}
                         helperText={usernameError}
                         error={Boolean(usernameError)}
+                        autoComplete="off"
                     />
 
                     <TextField
