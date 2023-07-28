@@ -131,7 +131,7 @@ export default function Signup() {
                         label="Password"
                         placeholder="Enter password"
                         fullWidth required
-                        type={password}
+                        type="password"
                         value={password}
                         onChange={handlePasswordChange}
                         helperText={passwordError}

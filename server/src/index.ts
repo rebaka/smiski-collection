@@ -55,18 +55,6 @@ app.post('/user', async(req, res) => {
         const {email, username, password} = req.body; 
 
         //Checks for if email and username are already in the database
-
-
-        // const existingEmail = await User.findOne({email});
-        // if(existingEmail) {
-        //     return res.status(400).json({error: "Email is already taken. Please input another email."});
-        // }
-
-        // const existingUsername = await User.findOne({username});
-        // if(existingUsername) {
-        //     return res.status(400).json({error: "Username is already taken. Please input another username."});
-        // }
-
         const exists = await User.findOne({ $or: [{ email }, { username }] });
         if(exists) {
             return res.status(400).json({error: "Username and/or email is already taken. Please input another one."});
