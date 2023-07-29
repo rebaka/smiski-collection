@@ -8,6 +8,7 @@ config();
 
 import Smiski from "./models/Smiski";
 import User from "./models/User";
+import { error } from 'console';
 
 const PORT = 5000;
 
@@ -73,6 +74,57 @@ app.post('/user', async(req, res) => {
         console.log("Error", error);
     }
 });
+
+//For sign-in 
+app.post('/sign-in', async (req, res) => {
+    const {username, password} = req.body; 
+
+    try {
+        const users = await User.find(); 
+
+        const correctUser = users.find(
+            (user) => user.username === username && user.password === password
+        );
+
+        if(correctUser) {
+            res.json({message: "Successful sign-in.", user: correctUser});
+        } else {
+            res.status(415).json({error: "Invalid credentials."})
+        }
+
+    } catch(error) {
+        console.log("Sign-in error", error);
+        res.status(450).json({error: "Server error."})
+    }
+
+    
+    // res.json(users);
+})
+
+// app.post('/sign-out', async (req, res) => {
+//     const {username, password} = req.body; 
+
+//     try {
+//         const users = await User.find(); 
+
+//         const correctUser = users.find(
+//             (user) => user.username === username && user.password === password
+//         );
+
+//         if(correctUser) {
+//             res.json({message: "Successful sign-in.", user: correctUser});
+//         } else {
+//             res.status(415).json({error: "Invalid credentials."})
+//         }
+
+//     } catch(error) {
+//         console.log("Sign-in error", error);
+//         res.status(450).json({error: "Server error."})
+//     }
+
+    
+//     // res.json(users);
+// })
 
 //fetch user collection data
 

@@ -37,6 +37,19 @@
     padding: 10px;
 }
 
+.signout {
+    color: #555;
+    font-size: 20px;
+    font-family: 'Roboto';
+    padding: 10px;
+}
+
+.signout:hover {
+    color: #000;
+    font-family: 'Roboto';
+    padding: 10px;
+}
+
 .customNavbar {
     margin-left: auto;
 }
