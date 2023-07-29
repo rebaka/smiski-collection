@@ -107,7 +107,7 @@ export default function Signin() {
                     <Button 
                         className="signInButton" 
                         variant="contained" 
-                        sx={{backgroundColor: "#23a441"}} 
+                        sx={{backgroundColor: "#23a441", marginBottom: '10px'}} 
                         fullWidth
                         type="submit"
                     >
@@ -119,6 +119,12 @@ export default function Signin() {
                     Don't have an account?  
                     <Link to="/sign-up" className="signup"> Register</Link>
                 </Typography>
+
+                {error && (
+                    <Typography color="error" variant="body2">
+                        {error}
+                    </Typography>
+                )}
             </Paper>
         </Grid>
     );

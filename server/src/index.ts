@@ -89,7 +89,7 @@ app.post('/sign-in', async (req, res) => {
         if(correctUser) {
             res.json({message: "Successful sign-in.", user: correctUser});
         } else {
-            res.status(415).json({error: "Invalid credentials."})
+            res.status(415).json({error: "Username and/or password is incorrect."})
         }
 
     } catch(error) {
@@ -100,31 +100,6 @@ app.post('/sign-in', async (req, res) => {
     
     // res.json(users);
 })
-
-// app.post('/sign-out', async (req, res) => {
-//     const {username, password} = req.body; 
-
-//     try {
-//         const users = await User.find(); 
-
-//         const correctUser = users.find(
-//             (user) => user.username === username && user.password === password
-//         );
-
-//         if(correctUser) {
-//             res.json({message: "Successful sign-in.", user: correctUser});
-//         } else {
-//             res.status(415).json({error: "Invalid credentials."})
-//         }
-
-//     } catch(error) {
-//         console.log("Sign-in error", error);
-//         res.status(450).json({error: "Server error."})
-//     }
-
-    
-//     // res.json(users);
-// })
 
 //fetch user collection data
 
