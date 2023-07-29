@@ -3,7 +3,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { Avatar, Button, Grid, Paper, TextField } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import { Typography } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
 
 export default function Signin() {
@@ -18,6 +18,7 @@ export default function Signin() {
     const [passwordError, setPasswordError] = useState("");
 
     const userContext = useContext(UserContext);
+    const navigate = useNavigate();
 
     const submitInfo = async (event: React.FormEvent) => {
         event.preventDefault();
@@ -46,6 +47,7 @@ export default function Signin() {
             if (response.ok) {
                 console.log("User sign-in sucessful:", data);
                 userContext?.setUser(data.user);
+                navigate('/');
             } else {
                 console.error("Failed to sign-in user:", data.error);
                 setError(data.error);
