@@ -2,18 +2,22 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
-import { Header } from './components/Header.tsx'
-import { UserContextProvider } from './context/UserContext.tsx'
 
-import Home from './pages/Home.tsx'
-import About from './pages/About.tsx'
+import { AuthProvider } from 'react-auth-kit';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
+    {/* set to true when doing https */}
 
-    <UserContextProvider>
+    <AuthProvider
+      authType={"cookie"}
+      authName={"_auth"}
+      cookieDomain={window.location.hostname}
+      cookieSecure={false}> 
       <App/>
-    </UserContextProvider>
+    </AuthProvider>
+
+
 
     {/* <App/> */}
   </React.StrictMode>,

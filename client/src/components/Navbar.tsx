@@ -1,16 +1,12 @@
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom';
 import './Navbar.css'
-import { UserContext, UserContextProvider } from '../context/UserContext';
+import { useAuthUser, useSignOut } from 'react-auth-kit';
 
 const Navbar: React.FC = () => {
+    const signOut = useSignOut()
 
-    const userContext = useContext(UserContext);
-    const { user } = userContext || {};
-
-    const signOut = () => {
-        userContext?.setUser(null);
-    };
+    const authUser = useAuthUser();
 
     return(
         <nav className="customNavbar">
@@ -27,11 +23,11 @@ const Navbar: React.FC = () => {
                     <Link to="/sign-in" className="signin">Sign in</Link>
                 </li> */}
                 <li>
-                {user?.username ? (
-                    <Link to="/" className="signout" onClick={signOut}>Sign Out</Link>
-                ):(
-                    <Link to="/sign-in" className="signin">Sign In</Link>
-                )}
+                    {authUser() ? (
+                        <Link to="/" className="signout" onClick={signOut}>Sign Out</Link>
+                    ):(
+                        <Link to="/sign-in" className="signin">Sign In</Link>
+                    )}      
                 </li>
             </ul>
         </nav>

@@ -1,6 +1,7 @@
 import express, {Request, Response} from "express";
 import mongoose from "mongoose";
 import cors from 'cors';
+import jwt from 'jsonwebtoken';
 
 //looks at dotenv file to load into environment variables
 import {config} from 'dotenv'
@@ -10,6 +11,9 @@ import Smiski from "./models/Smiski";
 import User from "./models/User";
 import { error } from 'console';
 
+import { AuthProvider } from "react-auth-kit";
+
+//Change port number once deployed
 const PORT = 5000;
 
 const app = express();
@@ -75,6 +79,8 @@ app.post('/user', async(req, res) => {
     }
 });
 
+const jwt = require('jsonwebtoken');
+
 //For sign-in 
 app.post('/sign-in', async (req, res) => {
     const {username, password} = req.body; 
@@ -87,7 +93,15 @@ app.post('/sign-in', async (req, res) => {
         );
 
         if(correctUser) {
-            res.json({message: "Successful sign-in.", user: correctUser});
+            // res.json({message: "Successful sign-in.", user: correctUser});
+            const accessToken = jwt.sign({name: username}, process.env.ACCESS_TOKEN_SECRET)
+            // res.json({ message: "Successful sign-in.", user: correctUser, accessToken: accessToken })
+            // res.json({accessToken: accessToken})
+
+            const responseData = { message: "Successful sign-in.", user: correctUser, accessToken: accessToken }
+            console.log("Response data:", responseData);
+            res.json(responseData);
+
         } else {
             res.status(415).json({error: "Username and/or password is incorrect."})
         }
@@ -104,5 +118,15 @@ app.post('/sign-in', async (req, res) => {
 //fetch user collection data
 
 //post user collection/choice
+// app.post('/collection/check', async (req, res) => {
+//     const
+
+//     try {
+
+//     } catch(error) {
+//         console.log("Trouble posting smiski to database", error);
+//         res.status(500).json({error: "Trouble posting smiski to database"})
+//     }
+// })
 
 //put to update data

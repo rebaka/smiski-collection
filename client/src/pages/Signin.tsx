@@ -1,10 +1,12 @@
 import './Signin.css'
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { Avatar, Button, Grid, Paper, TextField } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import { Typography } from '@material-ui/core';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
+
+import {useSignIn } from 'react-auth-kit';
 
 export default function Signin() {
 
@@ -17,8 +19,9 @@ export default function Signin() {
     const [usernameError, setUsernameError] = useState("");
     const [passwordError, setPasswordError] = useState("");
 
-    const userContext = useContext(UserContext);
     const navigate = useNavigate();
+
+    const signIn = useSignIn();
 
     const submitInfo = async (event: React.FormEvent) => {
         event.preventDefault();
@@ -42,11 +45,19 @@ export default function Signin() {
                   body: JSON.stringify(userData),
             });
 
+            console.log("Response:", response);
+
             const data = await response.json();
             
             if (response.ok) {
                 console.log("User sign-in sucessful:", data);
-                userContext?.setUser(data.user);
+                signIn({
+                    token: data.accessToken, 
+                    expiresIn: 3600, 
+                    tokenType: "Bearer", 
+                    authState: {username: data.user.username},
+                });
+
                 navigate('/');
             } else {
                 console.error("Failed to sign-in user:", data.error);

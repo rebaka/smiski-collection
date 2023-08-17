@@ -1,5 +1,4 @@
-import React, {createContext, useContext, useState} from 'react'
-import { UserContextProvider, UserContext, AuthUser } from '../context/UserContext';
+import { useAuthUser } from 'react-auth-kit';
 import { Link } from 'react-router-dom';
 import Navbar from "./Navbar"
 
@@ -8,8 +7,8 @@ import { Typography } from '@mui/material';
 
 export function Header() {
 
-    const userContext  = useContext(UserContext);
-    const username = userContext?.user?.username || 'Guest';
+    const authUser = useAuthUser();
+    const username = authUser()?.username;
 
     return (
         <div className="header">
@@ -21,7 +20,7 @@ export function Header() {
                         </Link>
                     </li>
                     <li>
-                        <Typography>Hello, {username}!</Typography>
+                        <Typography>Hello, {username ? username : 'Guest'}!</Typography>
                     </li>
                 </ul>
             </nav>  
