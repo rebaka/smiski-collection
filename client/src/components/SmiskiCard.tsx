@@ -4,7 +4,6 @@ import {CardContent, Typography} from '@material-ui/core';
 import Card from '@mui/material/Card';
 import { CardActions, Checkbox, FormGroup, FormControlLabel } from '@mui/material';
 import { useAuthUser, useIsAuthenticated } from 'react-auth-kit';
-import { error } from 'console';
 
 type Smiski = {
     _id: String,
