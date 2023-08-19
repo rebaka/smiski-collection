@@ -47,7 +47,6 @@ const SmiskiCard: React.FC<Props> = ({ smiski }) => {
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    // body: JSON.stringify(reqData),
 
                     body: JSON.stringify({ 
                         username: username, 
