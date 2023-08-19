@@ -16,31 +16,22 @@ type Smiski = {
 
 interface Props {
     smiski: Smiski;
+    checkedStatus: boolean;
 }
 
-const SmiskiCard: React.FC<Props> = ({ smiski }) => {
+const SmiskiCard: React.FC<Props> = ({ smiski, checkedStatus }) => {
     const authUser = useAuthUser();
     const isAuthenticated = useIsAuthenticated();
     const username = authUser()?.username;
 
-    const [checked, setChecked] = useState(false);
-
-    //fetch items user has checked already
-    // useEffect(() => {
-    //     if(isAuthenticated() && username) {
-    //         console.log("Checked smiskis retrieved")
-    //     }
-
-    // }, [isAuthenticated, username]);
+    const [checked, setChecked] = useState(checkedStatus);
 
     //For updating database with new checked items
     const handleChecked = async () => {
-        setChecked((prevChecked) => !prevChecked);
+        const newChecked = !checked;
+        setChecked(newChecked);
 
         if(isAuthenticated() && username) {
-            console.log("isAuthenticated:", isAuthenticated());
-            console.log("username:", username);
-
             try {
                 const response = await fetch('http://localhost:5000/api/checked', {
                     method: 'POST', 
@@ -51,11 +42,9 @@ const SmiskiCard: React.FC<Props> = ({ smiski }) => {
                     body: JSON.stringify({ 
                         username: username, 
                         smiskiId: smiski._id, 
-                        isChecked: !checked, 
+                        isChecked: newChecked, 
                     }),
                 });
-
-                console.log("smiski ID", smiski._id)
 
                 if(response.ok) {
                     console.log("Checked items updated successfully.");
@@ -68,6 +57,10 @@ const SmiskiCard: React.FC<Props> = ({ smiski }) => {
             }
         }
     }
+
+    useEffect(() => {
+        setChecked(checkedStatus);
+    }, [checkedStatus]);
 
     return(
         <Card className="smiskiCard" style={{ borderRadius: 18}} key={smiski._id}>
