@@ -1,12 +1,17 @@
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate  } from 'react-router-dom';
 import './Navbar.css'
 import { useAuthUser, useSignOut } from 'react-auth-kit';
 
 const Navbar: React.FC = () => {
-    const signOut = useSignOut()
-
+    const signOut = useSignOut();
+    const navigate = useNavigate();
     const authUser = useAuthUser();
+
+    const handleSignOut = () => {
+        signOut();
+        navigate('/');
+    }
 
     return(
         <nav className="customNavbar">
@@ -19,12 +24,9 @@ const Navbar: React.FC = () => {
                     <Link to="/about" className="about">About</Link>
                 </li>
 
-                {/* <li>
-                    <Link to="/sign-in" className="signin">Sign in</Link>
-                </li> */}
                 <li>
                     {authUser() ? (
-                        <Link to="/" className="signout" onClick={signOut}>Sign Out</Link>
+                        <Link to="/" className="signout" onClick={handleSignOut}>Sign Out</Link>
                     ):(
                         <Link to="/sign-in" className="signin">Sign In</Link>
                     )}      

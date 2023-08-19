@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import './Home.css'
 import { Autocomplete, TextField } from '@mui/material';
 import SmiskiCard from '../components/SmiskiCard';
+import { useAuthUser } from 'react-auth-kit';
 
 type Smiski = {
     _id: String,
@@ -28,8 +29,12 @@ export default function Home() {
   const [filteredSmiskis, setFilteredSmiskis] = useState<Smiski[]>([]);
   const [filterText, setFilterText] = useState<string>('');
   const [selectedSeries, setSelectedSeries] = useState<string | null>(null);
+  const [checkedItems, setCheckedItems] = useState('');
 
   const uniqueSeries = getUniqueSeries(smiskis);
+
+  const authUser = useAuthUser();
+  const username = authUser()?.username;
 
   //To fetch data from API endpoints created
   useEffect(() => {
@@ -51,6 +56,17 @@ export default function Home() {
     setFilteredSmiskis(filteredSmiskis);
   }, [smiskis, filterText, selectedSeries]);
 
+  const loadCheckedSmiskis = async (username: String) => {
+    try {
+      const response = await fetch(`/api/checked?userId=${username}`);
+      const data = await response.json();
+      console.log("data", data.checkedSmiski);
+
+    } catch (error) {
+      console.log("Error loading checked smiskis", error);
+    }
+  };
+
   return (
       <div className="Home">
         <div className="content">
@@ -68,7 +84,10 @@ export default function Home() {
           <div className="container">
             <div className="smiskiContainer">
               {filteredSmiskis.map((smiski) => (
-                <SmiskiCard key={smiskis.id} smiski={smiski} />
+                <SmiskiCard 
+                key={smiskis.id} 
+                smiski={smiski} 
+              />
               ))}
             </div>
           </div>

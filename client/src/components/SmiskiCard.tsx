@@ -3,6 +3,8 @@ import './SmiskiCard.css'
 import {CardContent, Typography} from '@material-ui/core';
 import Card from '@mui/material/Card';
 import { CardActions, Checkbox, FormGroup, FormControlLabel } from '@mui/material';
+import { useAuthUser, useIsAuthenticated } from 'react-auth-kit';
+import { error } from 'console';
 
 type Smiski = {
     _id: String,
@@ -17,13 +19,74 @@ interface Props {
 }
 
 const SmiskiCard: React.FC<Props> = ({ smiski }) => {
+    const authUser = useAuthUser();
+    const isAuthenticated = useIsAuthenticated();
+    const username = authUser()?.username;
+
+    const [checked, setChecked] = useState(false);
+
+    //fetch items user has checked already
+    // useEffect(() => {
+    //     if(isAuthenticated() && username) {
+    //         console.log("Checked smiskis retrieved")
+    //     }
+
+    // }, [isAuthenticated, username]);
+
+    //For updating database with new checked items
+    const handleChecked = async () => {
+        setChecked((prevChecked) => !prevChecked);
+
+        if(isAuthenticated() && username) {
+            console.log("isAuthenticated:", isAuthenticated());
+            console.log("username:", username);
+
+            try {
+
+                // const reqData = {
+                //     username: username, 
+                //     smiskiId: smiski._id, 
+                //     isChecked: !checked, 
+                // }
+
+                // console.log(reqData);
+
+
+                const response = await fetch('http://localhost:5000/api/checked', {
+                    method: 'POST', 
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    // body: JSON.stringify(reqData),
+
+                    body: JSON.stringify({ 
+                        username: username, 
+                        smiskiId: smiski._id, 
+                        isChecked: !checked, 
+                    }),
+                });
+
+                console.log("smiski ID", smiski._id)
+
+                if(response.ok) {
+                    console.log("Checked items updated successfully.");
+                } else {
+                    console.log("Error checking items.")
+                }
+
+            } catch(error) {
+                console.log("Error updating items.", error);
+            }
+        }
+    }
+
     return(
         <Card className="smiskiCard" style={{ borderRadius: 18}} key={smiski._id}>
             <CardContent className="customCardContent">
                 <div className="checkboxContainer">
                     <CardActions>
                         <FormGroup>
-                            <FormControlLabel control={<Checkbox sx={{ height: 5, mt: -6, mb: -2 }}/>} label="" />
+                            <FormControlLabel control={<Checkbox sx={{ height: 5, mt: -6, mb: -2 } } checked={checked} onChange={handleChecked}/>} label="" />
                         </FormGroup>
                     </CardActions>
                 </div>
@@ -45,61 +108,3 @@ const SmiskiCard: React.FC<Props> = ({ smiski }) => {
 }
 
 export default SmiskiCard;
-
-// type Smiski = {
-//     _id: String,
-//     id: Number,
-//     name: String,
-//     series: String,
-//     description: String,
-// }
-
-
-// const SmiskiCard: React.FC = () => {
-
-//     const [smiskis, setSmiskis] = useState<Smiski[]>([]);
-
-//     //To fetch data from API endpoints created
-//     useEffect(() => {
-//         async function fetchSmiskis() {
-//         const response = await fetch("http://localhost:5000/smiski"); //return object with JSON method
-//         const newSmiskis = await response.json();
-//         setSmiskis(newSmiskis);
-//         }
-//         fetchSmiskis();
-//     }, []);
-
-//     return(
-//         <div className="container">
-//             <div className="smiskiContainer">
-//             {smiskis.map((smiski) => (
-//                 <Card className="smiskiCard" style={{ borderRadius: 18}} key={smiski._id}>
-//                 <CardContent className="customCardContent">
-//                     <CardActions>
-//                     <FormGroup>
-//                         <FormControlLabel control={<Checkbox/>} label="" />
-//                     </FormGroup>
-//                     </CardActions>
-
-//                     <Typography className="SmiskiName" variant="h5" component="div" style={{ marginTop: '-8px' }}>
-//                     {smiski.name}
-//                     </Typography>
-
-//                     <Typography className="SmiskiSeries" variant="h6" style={{ marginTop: '-8px' }}>
-//                     {smiski.series}
-//                     </Typography>
-
-//                     <Typography className="SmiskiDescription" variant="body2" paragraph>
-//                     {smiski.description}
-//                     </Typography>
-//                 </CardContent>
-//                 </Card>
-//                 )
-//             )}
-//             </div>
-//         </div>
-//     )
-
-// }
-
-// export default SmiskiCard;

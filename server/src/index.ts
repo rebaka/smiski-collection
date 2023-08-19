@@ -9,6 +9,7 @@ config();
 
 import Smiski from "./models/Smiski";
 import User from "./models/User";
+import CheckedSmiski from "./models/CheckedSmiski"
 import { error } from 'console';
 
 import { AuthProvider } from "react-auth-kit";
@@ -93,11 +94,7 @@ app.post('/sign-in', async (req, res) => {
         );
 
         if(correctUser) {
-            // res.json({message: "Successful sign-in.", user: correctUser});
             const accessToken = jwt.sign({name: username}, process.env.ACCESS_TOKEN_SECRET)
-            // res.json({ message: "Successful sign-in.", user: correctUser, accessToken: accessToken })
-            // res.json({accessToken: accessToken})
-
             const responseData = { message: "Successful sign-in.", user: correctUser, accessToken: accessToken }
             console.log("Response data:", responseData);
             res.json(responseData);
@@ -110,23 +107,41 @@ app.post('/sign-in', async (req, res) => {
         console.log("Sign-in error", error);
         res.status(450).json({error: "Server error."})
     }
-
-    
-    // res.json(users);
 })
 
-//fetch user collection data
+//For adding and updating checked items
+app.post('/api/checked', async (req, res) => {
+    const { username, smiskiId, isChecked } = req.body;
+    try {
+        if (isChecked) {
+            const checkedSmiski = new CheckedSmiski({
+                username: username,
+                smiskiId: smiskiId,
+                isChecked: true
+            });
 
-//post user collection/choice
-// app.post('/collection/check', async (req, res) => {
-//     const
+            const createdCheckedSmiski = await checkedSmiski.save();
 
-//     try {
+            const response = {
+                message: 'Checked item added to database',
+                checkedSmiski: createdCheckedSmiski
+            };
 
-//     } catch(error) {
-//         console.log("Trouble posting smiski to database", error);
-//         res.status(500).json({error: "Trouble posting smiski to database"})
-//     }
+            res.status(200).json(response);
+        } else {
+            await CheckedSmiski.findOneAndDelete({
+                username: username,
+                smiskiId: smiskiId
+            });
+
+            res.status(200).json({ message: 'Unchecked item removed from database' });
+        }
+    } catch (error) {
+        console.log('Error updating checked items', error);
+        res.status(402).json({ error: 'Server error' });
+    }
+});
+
+// app.get('api/checked', async (req, res) => {
+    
 // })
-
-//put to update data

@@ -75,7 +75,6 @@ export default function Signin() {
         setUsername(usernameValue);
         setUsernameError("");
         setError("");
-
     }
 
     const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
