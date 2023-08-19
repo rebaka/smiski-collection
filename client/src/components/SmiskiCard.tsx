@@ -42,16 +42,6 @@ const SmiskiCard: React.FC<Props> = ({ smiski }) => {
             console.log("username:", username);
 
             try {
-
-                // const reqData = {
-                //     username: username, 
-                //     smiskiId: smiski._id, 
-                //     isChecked: !checked, 
-                // }
-
-                // console.log(reqData);
-
-
                 const response = await fetch('http://localhost:5000/api/checked', {
                     method: 'POST', 
                     headers: {
