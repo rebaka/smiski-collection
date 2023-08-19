@@ -13,7 +13,6 @@ type Smiski = {
     series: String,
     description: String,
 }
-
 interface Props {
     smiski: Smiski;
     checkedStatus: boolean;

@@ -1,10 +1,9 @@
 import './Signin.css'
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { Avatar, Button, Grid, Paper, TextField } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import { Typography } from '@material-ui/core';
 import { Link, useNavigate } from 'react-router-dom';
-import { UserContext } from '../context/UserContext';
 
 import {useSignIn } from 'react-auth-kit';
 
