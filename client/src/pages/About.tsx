@@ -14,7 +14,11 @@ export default function About() {
             </p>
 
             <p>
-                Keep track of your collection of smiskis and see which ones you haven't collected yet!
+                Keep track of your collection of smiskis and see which ones you haven't collected yet.
+            </p>
+
+            <p>
+                Create an account to save your smiski collection!
             </p>
         </div>
     );
