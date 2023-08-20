@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import './Home.css'
-import { Autocomplete, TextField } from '@mui/material';
+import { Autocomplete, ListItem, ListItemText, TextField } from '@mui/material';
 import SmiskiCard from '../components/SmiskiCard';
 import { useAuthUser, useIsAuthenticated } from 'react-auth-kit';
 
@@ -92,7 +92,14 @@ export default function Home() {
               onChange={(event, newValue) => setSelectedSeries(newValue)}
               options={uniqueSeries}
               renderInput={(params) => <TextField {...params} label="Filter by Series" />}
-              sx={{ backgroundColor: 'white', borderRadius: 4, boxShadow: 2, p: 1.5, fontWeight: 'bold' }}
+              sx={{
+                backgroundColor: 'white',
+                borderRadius: 4,
+                p: 1.5,
+                fontWeight: 'bold',
+              }}
+              componentsProps={{ popper: { style: { width: 'fit-content' } } }}
+
             />
           </div>
 

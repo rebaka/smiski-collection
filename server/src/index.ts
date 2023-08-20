@@ -10,9 +10,6 @@ config();
 import Smiski from "./models/Smiski";
 import User from "./models/User";
 import CheckedSmiski from "./models/CheckedSmiski"
-import { error } from 'console';
-
-import { AuthProvider } from "react-auth-kit";
 
 //Change port number once deployed
 const PORT = 5000;
@@ -142,6 +139,13 @@ app.post('/api/checked', async (req, res) => {
     }
 });
 
-// app.get('api/checked', async (req, res) => {
-    
-// })
+app.get('/api/checked/:username', async (req, res) => {
+    const { username } = req.params;
+    try {
+        const checkedSmiskis = await CheckedSmiski.find({ username: username });
+        res.status(200).json({ checkedSmiskis: checkedSmiskis });
+    } catch (error) {
+        console.log('Error retrieving checked items', error);
+        res.status(500).json({ error: 'Server error' });
+    }
+});
