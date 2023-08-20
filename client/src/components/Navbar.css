@@ -1,0 +1,55 @@
+.home {
+    color: #555;
+    font-size: 20px;
+    font-family: 'Roboto';
+    padding: 10px;
+}
+
+.home:hover {
+    color: #000;
+    font-family: 'Roboto';
+    padding: 10px;
+}
+
+.about {
+    color: #555;
+    font-size: 20px;
+    font-family: 'Roboto';
+    padding: 10px;
+}
+
+.about:hover {
+    color: #000;
+    font-family: 'Roboto';
+    padding: 10px;
+}
+
+.signin {
+    color: #555;
+    font-size: 20px;
+    font-family: 'Roboto';
+    padding: 10px;
+}
+
+.signin:hover {
+    color: #000;
+    font-family: 'Roboto';
+    padding: 10px;
+}
+
+.signout {
+    color: #555;
+    font-size: 20px;
+    font-family: 'Roboto';
+    padding: 10px;
+}
+
+.signout:hover {
+    color: #000;
+    font-family: 'Roboto';
+    padding: 10px;
+}
+
+.customNavbar {
+    margin-left: auto;
+}
