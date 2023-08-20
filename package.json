@@ -13,7 +13,14 @@
     "jsonwebtoken": "^9.0.1",
     "react-router-dom": "^6.14.2",
     "react-scale-text": "^1.2.2"
+
   },
+
+  "scripts": {
+    "start-server": "cd server && npm run dev",
+    "start-client": "cd client && npm run dev"
+  },
+
   "devDependencies": {
     "@types/node": "^20.4.2"
   }
