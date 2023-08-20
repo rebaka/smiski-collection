@@ -26,5 +26,8 @@
     "eslint-plugin-react-refresh": "^0.4.1",
     "typescript": "^5.0.2",
     "vite": "^4.4.0"
+  },
+  "scripts": {
+    "start-client": "cd client && npm install && vite"
   }
 }

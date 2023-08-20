@@ -17,8 +17,7 @@
   },
 
   "scripts": {
-    "start-server": "cd server && npm run dev",
-    "start-client": "cd client && npm run dev"
+    "start": "npm run start-server && npm run start-client"
   },
 
   "devDependencies": {
