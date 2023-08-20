@@ -2,6 +2,7 @@ import express, {Request, Response} from "express";
 import mongoose from "mongoose";
 import cors from 'cors';
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
 
 //looks at dotenv file to load into environment variables
 import {config} from 'dotenv'
@@ -81,30 +82,34 @@ const jwt = require('jsonwebtoken');
 
 //For sign-in 
 app.post('/sign-in', async (req, res) => {
-    const {username, password} = req.body; 
-
+    const { username, password } = req.body;
+  
     try {
-        const users = await User.find(); 
-
-        const correctUser = users.find(
-            (user) => user.username === username && user.password === password
-        );
-
-        if(correctUser) {
-            const accessToken = jwt.sign({name: username}, process.env.ACCESS_TOKEN_SECRET)
-            const responseData = { message: "Successful sign-in.", user: correctUser, accessToken: accessToken }
-            console.log("Response data:", responseData);
-            res.json(responseData);
-
+      const user = await User.findOne({ username });
+  
+      if (user) {
+        const passwordMatches = await bcrypt.compare(password, user.password);
+  
+        if (passwordMatches) {
+          const accessToken = jwt.sign({ name: username }, process.env.ACCESS_TOKEN_SECRET);
+          const responseData = {
+            message: 'Successful sign-in.',
+            user: user,
+            accessToken: accessToken,
+          };
+          console.log('Response data:', responseData);
+          res.json(responseData);
         } else {
-            res.status(415).json({error: "Username and/or password is incorrect."})
+          res.status(401).json({ error: 'Username and/or password is incorrect.' });
         }
-
-    } catch(error) {
-        console.log("Sign-in error", error);
-        res.status(450).json({error: "Server error."})
+      } else {
+        res.status(404).json({ error: 'User not found.' });
+      }
+    } catch (error) {
+      console.log('Sign-in error', error);
+      res.status(500).json({ error: 'Server error.' });
     }
-})
+  });
 
 //For adding and updating checked items
 app.post('/api/checked', async (req, res) => {

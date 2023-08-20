@@ -2,11 +2,10 @@ import './Signup.css'
 import { Avatar, Button, Grid, Paper, TextField } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import { Typography } from '@material-ui/core';
-import React, { useEffect, useState } from 'react';
-import { error } from 'console';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Signup() {
-
     const paperStyle = {padding: 20, height: '60vh', width:350, margin: "20px auto"}
     const avatarStyle = {backgroundColor: "#23a441"}
 
@@ -17,6 +16,8 @@ export default function Signup() {
     const [emailError, setEmailError] = useState("");
     const [usernameError, setUsernameError] = useState("");
     const [passwordError, setPasswordError] = useState("");
+
+    const navigate = useNavigate();
  
     const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const emailValue = e.target.value;
@@ -88,6 +89,7 @@ export default function Signup() {
             
             if (response.ok) {
                 console.log("User registered:", data);
+                navigate('/');
             } else {
                 console.error("Failed to register user:", data.error);
                 setError(data.error);
