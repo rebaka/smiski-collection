@@ -17,7 +17,7 @@
   },
 
   "scripts": {
-    "start": "npm run start-server && npm run start-client"
+    "build": "vite build"
   },
 
   "devDependencies": {
