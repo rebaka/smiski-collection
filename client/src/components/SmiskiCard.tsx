@@ -61,7 +61,7 @@ const SmiskiCard: React.FC<Props> = ({ smiski, checkedStatus }) => {
     }, [checkedStatus]);
 
     return(
-        <Card className="smiskiCard" style={{ borderRadius: 18}} key={smiski._id}>
+        <Card className="smiskiCard" style={{ borderRadius: 18}} key={smiski._id as any}>
             <CardContent className="customCardContent">
                 <div className="checkboxContainer">
                     <CardActions>

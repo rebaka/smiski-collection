@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import './Home.css'
-import { Autocomplete, ListItem, ListItemText, TextField } from '@mui/material';
+import { Autocomplete, TextField } from '@mui/material';
 import SmiskiCard from '../components/SmiskiCard';
 import { useAuthUser, useIsAuthenticated } from 'react-auth-kit';
 
@@ -15,7 +15,7 @@ type Smiski = {
 //filer out duplicate series names
 function getUniqueSeries(smiskis: Smiski[]): string[] {
   const seriesSet = new Set<string>(); //contains only unique values
-  smiskis.forEach((smiski) => seriesSet.add(smiski.series));
+  smiskis.forEach((smiski) => seriesSet.add(smiski.series.toString()));
 
   const seriesArray = Array.from(seriesSet);
 
@@ -27,7 +27,7 @@ export default function Home() {
   const [smiskis, setSmiskis] = useState<Smiski[]>([]);
 
   const [filteredSmiskis, setFilteredSmiskis] = useState<Smiski[]>([]);
-  const [filterText, setFilterText] = useState<string>('');
+  const [filterText] = useState<string>('');
   const [selectedSeries, setSelectedSeries] = useState<string | null>(null);
 
   const uniqueSeries = getUniqueSeries(smiskis);
@@ -89,7 +89,7 @@ export default function Home() {
             <Autocomplete
               id="seriesFilter"
               value={selectedSeries}
-              onChange={(event, newValue) => setSelectedSeries(newValue)}
+              onChange={(_event, newValue) => setSelectedSeries(newValue)}
               options={uniqueSeries}
               renderInput={(params) => <TextField {...params} label="Filter by Series" />}
               sx={{
@@ -107,9 +107,9 @@ export default function Home() {
             <div className="smiskiContainer">
               {filteredSmiskis.map((smiski) => (
                 <SmiskiCard 
-                key={smiskis.id} 
+                key={smiski.id as any} 
                 smiski={smiski} 
-                checkedStatus={checkedSmiskis[smiski._id] || false}
+                checkedStatus={checkedSmiskis[smiski._id as keyof typeof checkedSmiskis] || false}
               />
               ))}
             </div>

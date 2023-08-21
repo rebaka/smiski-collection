@@ -3,7 +3,7 @@ import { Avatar, Button, Grid, Paper, TextField } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import { Typography } from '@material-ui/core';
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function Signup() {
     const paperStyle = {padding: 20, height: '60vh', width:350, margin: "20px auto"}
