@@ -13,9 +13,7 @@
     "jsonwebtoken": "^9.0.1",
     "react-router-dom": "^6.14.2",
     "react-scale-text": "^1.2.2"
-
   },
-
   "scripts": {
     "install-server": "cd server && npm install",
     "start-server": "cd server && npx ts-node src/index.ts",
@@ -23,8 +21,8 @@
     "build-client": "cd client && npm run build",
     "start-client": "cd client && npm run start"
   },
-
   "devDependencies": {
-    "@types/node": "^20.4.2"
+    "@types/node": "^20.4.2",
+    "typescript": "^5.1.6"
   }
 }
