@@ -31,7 +31,6 @@
     "ts-node": "^10.9.1"
   },
   "scripts": {
-    "dev": "vite",
-    "build": "vite build"
+    "start-server": "npm install && node server.js"
   }
 }
