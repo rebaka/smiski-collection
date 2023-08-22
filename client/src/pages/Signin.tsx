@@ -36,7 +36,7 @@ export default function Signin() {
         };
         
         try {
-            const response = await fetch("http://localhost:5000/sign-in", {
+            const response = await fetch("https://smiski-collection-backend.onrender.com/sign-in", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

@@ -42,11 +42,6 @@ app.get('/', (req, res) => {
     res.send(" Testing");
 });
 
-// const db = mongoose.connect(process.env.MONGO_URL!).then(() => {
-//     console.log(`Listening on port ${PORT}`);
-//     app.listen(PORT);
-// })
-
 const db = mongoose.connect(process.env.MONGO_URL!);
 
 db.then(() => {
