@@ -39,7 +39,7 @@ export default function Home() {
   //To fetch data from API endpoints created
   useEffect(() => {
     async function fetchSmiskis() {
-      const response = await fetch("http://localhost:5000/smiski"); //return object with JSON method
+      const response = await fetch("https://smiski-collection-backend.onrender.com/smiski"); //return object with JSON method
       const newSmiskis = await response.json();
       setSmiskis(newSmiskis);
       setFilteredSmiskis(newSmiskis); //automatically sets filtered smiskis as all smiskis
@@ -61,7 +61,7 @@ export default function Home() {
 
   const loadCheckedSmiskis = async (username : String) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/checked/${username}`);
+      const response = await fetch(`https://smiski-collection-backend.onrender.com/${username}`);
       const data = await response.json(); 
 
       const newCheckedSmiskis: Record<string, boolean> = {};
