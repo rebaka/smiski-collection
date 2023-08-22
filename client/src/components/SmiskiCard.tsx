@@ -31,7 +31,7 @@ const SmiskiCard: React.FC<Props> = ({ smiski, checkedStatus }) => {
 
         if(isAuthenticated() && username) {
             try {
-                const response = await fetch('http://localhost:5000/api/checked', {
+                const response = await fetch('https://smiski-collection-backend.onrender.com/api/checked', {
                     method: 'POST', 
                     headers: {
                         'Content-Type': 'application/json',
