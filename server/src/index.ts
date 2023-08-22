@@ -19,7 +19,7 @@ const app = express();
 
 app.use(
     cors({
-        origin: "*",
+        origin: "https://smiski-collection.onrender.com",
     }));
 //middlewear function, tell express to use, runs express.json first
 app.use(express.json());
