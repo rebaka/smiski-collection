@@ -6,4 +6,4 @@ Deployed here!!! [Smiski Collection](https://smiski-collection.onrender.com/) ðŸ
 
 ![Smiski Collection image](images/smiski_collection.png)
 
-Because I used the free isntance on Render it takes a while for the collection data and sign-in to work, eventually after a couple minutes everything will load. 
+Because I used the free instance on Render it takes a while for the collection data and sign-in/sign-up to work, eventually after a couple minutes everything will load. 
