@@ -61,7 +61,7 @@ export default function Home() {
 
   const loadCheckedSmiskis = async (username : String) => {
     try {
-      const response = await fetch(`https://smiski-collection-backend.onrender.com/${username}`);
+      const response = await fetch(`https://smiski-collection-backend.onrender.com/api/checked/${username}`);
       const data = await response.json(); 
 
       const newCheckedSmiskis: Record<string, boolean> = {};
