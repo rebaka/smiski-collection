@@ -42,10 +42,21 @@ app.get('/', (req, res) => {
     res.send(" Testing");
 });
 
-const db = mongoose.connect(process.env.MONGO_URL!).then(() => {
-    console.log(`Listening on port ${PORT}`);
-    app.listen(PORT);
-})
+// const db = mongoose.connect(process.env.MONGO_URL!).then(() => {
+//     console.log(`Listening on port ${PORT}`);
+//     app.listen(PORT);
+// })
+
+const db = mongoose.connect(process.env.MONGO_URL!);
+
+db.then(() => {
+    console.log(`Connected to MongoDB`);
+    app.listen(PORT, () => {
+        console.log(`Listening on port ${PORT}`);
+    });
+}).catch(error => {
+    console.error(`Error connecting to MongoDB: ${error}`);
+});
 
 //need to fetch user data
 app.get('/user', async (req, res) => {
